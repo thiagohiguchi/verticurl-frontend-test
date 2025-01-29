@@ -1,0 +1,24 @@
+@import 'modules/variables';
+@import 'modules/mixins';
+@import 'modules/common';
+@import 'pages/home';
+
+.container {
+  background-color: yellow;
+  max-width: $grid;
+  width: 90%;
+  margin: auto;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  // @include phone {
+  //   font-size: 3.5rem;
+  // }
+}
