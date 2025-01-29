@@ -2,7 +2,21 @@ extends ./layouts/_default.pug
 block variables
 	- var title = 'Verticurl Frontend Test | Thiago Higuchi'
 	- var extraCSS = [FILE_PREFIX+'css/pages/speakers.min.css']
+	- var imgPrefixUrl = IMG_PREFIX_URL
+
 
 block content
 	main.container
-		p aissssssszz
+		h2.heading.text--center Spotlight Speakers
+		.speakers 
+			- var n = 8
+			each _, index in Array.from({ length: n })
+				.speakers__item 
+					.speakers__picture 
+						img(src=imgPrefixUrl+'images/speakers/ana.jpg' alt="Ana Applegate")
+					.speakers__textbox 
+						.speakers__name 
+							h5 Ana Applegate
+						.speakers__details
+							p Chief Executive Officer
+							p Veeam Software

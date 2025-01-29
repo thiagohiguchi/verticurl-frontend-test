@@ -1,5 +1,102 @@
-.container {
-  // background: purple;
+@use 'modules/variables' as *; // Import variables from modules folder
+@use 'modules/mixins' as *; // Import mixins from modules folder
 
-  margin: 0;
+$heading-color: #232323;
+$text-color: #505861;
+$primary-color: #00d15f;
+
+@font-face {
+  font-family: 'Tahoma';
+  src: url('../../assets/fonts/TAHOMABD.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: $heading-color;
+  font-family: 'Tahoma', sans-serif;
+}
+
+.heading {
+  font-size: 1.5625rem;
+  line-height: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+
+  @include tablet {
+    font-size: 1.875rem;
+    line-height: 2.1875rem;
+  }
+
+  @include desktop {
+    font-size: 3.125rem;
+    line-height: 3.75rem;
+  }
+
+  @include desktop-lg {
+  }
+}
+
+.speakers {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 30px;
+  width: 100%;
+  margin-top: 44px;
+
+  background: salmon;
+
+  &__item {
+    width: 100%;
+    border-width: 1px;
+    border-color: #000;
+    border-style: solid;
+  }
+
+  &__picture {
+    background-color: $primary-color;
+    min-height: 285px;
+  }
+  &__textbox {
+    margin-top: 32px;
+    text-align: center;
+  }
+  &__name {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    letter-spacing: 0px;
+  }
+  &__details {
+    color: $text-color;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 400;
+    margin-top: 16px;
+  }
+
+  @include tablet {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    row-gap: 64px;
+    column-gap: 30px;
+    // background-color: cyan;
+    margin-top: 88px;
+
+    &__item {
+      // max-width: 285px;
+    }
+  }
+
+  @include desktop {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+
+    &__item {
+      background-color: cyan;
+      // flex-basis: calc(25% - 30px);
+    }
+  }
 }
