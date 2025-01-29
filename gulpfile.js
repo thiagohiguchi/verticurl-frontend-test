@@ -28,7 +28,7 @@ const paths = {
   pug: 'src/pug/**/*.pug',
   sass: 'src/sass/**/*.scss',
   js: 'src/js/**/*.js',
-  images: 'src/images/**/*',
+  images: 'src/images/**/*.{jpg,jpeg,png,gif,svg}',
   assets: 'src/assets/**/*',
   public: 'public',
 };
@@ -85,15 +85,18 @@ function compileJs() {
 
 // Optimize images
 function optimizeImages() {
-  return src(paths.images)
-    .pipe(
-      imagemin({
-        optimizationLevel: 5,
-        progressive: true,
-        interlaced: true,
-      })
-    )
-    .pipe(dest(`${paths.dist}/images`));
+  return (
+    // src(paths.images, { buffer: false })
+    src('src/images/**/*.{jpg,jpeg,png}', { encoding: false })
+      .pipe(
+        imagemin([
+          imagemin.mozjpeg({ quality: 85, progressive: true }), // Lossy optimization for JPEG
+          imagemin.optipng({ optimizationLevel: 5 }), // Optimization for PNG
+          imagemin.svgo(), // Optimization for SVG
+        ])
+      )
+      .pipe(dest(`${paths.dist}/images`))
+  );
 }
 
 // Copy static assets
@@ -103,16 +106,16 @@ function copyAssets() {
 
 // Copy public folder content (e.g., static files)
 function copyPublic() {
-  const files = fs.readdirSync(paths.public + '/');
+  // const files = fs.readdirSync(paths.public + '/');
 
-  // If no files, log and exit successfully
-  console.log(`files.length`, files.length);
-  if (files.length <= 0) {
-    console.log('No files found. Task completed successfully.');
-    return Promise.resolve(); // End task successfully if no files
-  }
+  // // If no files, log and exit successfully
+  // console.log(`files.length`, files.length);
+  // if (files.length <= 0) {
+  //   console.log('No files found. Task completed successfully.');
+  //   return Promise.resolve(); // End task successfully if no files
+  // }
 
-  return src(paths.public + '/**/*', { allowEmpty: true })
+  return src(paths.public, { allowEmpty: true })
     .pipe(dest(paths.dist))
     .on('end', () => {
       console.log('Task completed successfully (even if empty)');
@@ -133,7 +136,7 @@ function devWatch() {
   watch(paths.js, compileJs);
   watch(paths.images, optimizeImages);
   watch(paths.assets, copyAssets);
-  // watch(paths.public, copyPublic).on('change', browserSync.reload);
+  watch(paths.public, copyPublic).on('change', browserSync.reload);
 }
 
 // Build task
@@ -144,8 +147,8 @@ const build = series(
     compileSass,
     compileJs,
     optimizeImages,
-    copyAssets
-    // copyPublic
+    copyAssets,
+    copyPublic
   )
 );
 
