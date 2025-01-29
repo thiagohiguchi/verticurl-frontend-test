@@ -56,10 +56,11 @@ function compileSass() {
   return (
     src(paths.sass)
       .pipe(
-        sass({ outputStyle: 'compressed', indentWidth: 0 }).on(
-          'error',
-          sass.logError
-        ) // Compile Sass
+        sass({
+          loadPaths: ['./src/sass'],
+          outputStyle: 'compressed',
+          indentWidth: 0,
+        }).on('error', sass.logError) // Compile Sass
       )
       // .pipe(autoprefixer('last 2 version'))
       // .pipe(minify())
