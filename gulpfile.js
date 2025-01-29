@@ -11,8 +11,6 @@ const clean = require('gulp-clean');
 const rename = require('gulp-rename');
 const browserSync = require('browser-sync').create();
 const gulpif = require('gulp-if');
-const fs = require('fs');
-const path = require('path');
 
 // Environment variables
 const isProduction = process.env.NODE_ENV === 'production';
@@ -85,18 +83,15 @@ function compileJs() {
 
 // Optimize images
 function optimizeImages() {
-  return (
-    // src(paths.images, { buffer: false })
-    src('src/images/**/*.{jpg,jpeg,png}', { encoding: false })
-      .pipe(
-        imagemin([
-          imagemin.mozjpeg({ quality: 85, progressive: true }), // Lossy optimization for JPEG
-          imagemin.optipng({ optimizationLevel: 5 }), // Optimization for PNG
-          imagemin.svgo(), // Optimization for SVG
-        ])
-      )
-      .pipe(dest(`${paths.dist}/images`))
-  );
+  return src(paths.images, { encoding: false })
+    .pipe(
+      imagemin([
+        imagemin.mozjpeg({ quality: 85, progressive: true }), // Lossy optimization for JPEG
+        imagemin.optipng({ optimizationLevel: 5 }), // Optimization for PNG
+        imagemin.svgo(), // Optimization for SVG
+      ])
+    )
+    .pipe(dest(`${paths.dist}/images`));
 }
 
 // Copy static assets
@@ -106,15 +101,6 @@ function copyAssets() {
 
 // Copy public folder content (e.g., static files)
 function copyPublic() {
-  // const files = fs.readdirSync(paths.public + '/');
-
-  // // If no files, log and exit successfully
-  // console.log(`files.length`, files.length);
-  // if (files.length <= 0) {
-  //   console.log('No files found. Task completed successfully.');
-  //   return Promise.resolve(); // End task successfully if no files
-  // }
-
   return src(paths.public, { allowEmpty: true })
     .pipe(dest(paths.dist))
     .on('end', () => {
