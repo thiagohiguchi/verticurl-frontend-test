@@ -34,9 +34,9 @@ block content
 			.container
 				.steps 
 					each val, index in [1, 2, 3, 4, 5, 6, 7]
-						.steps__item
-							div
-								.steps__number(class='steps__number--' + (index + 1))
+						.steps__item(class='steps__item--' + (index + 1))
+							.steps__decoration(class='steps__decoration--' + (index + 1))
+								.steps__number
 									span= index + 1
 							.steps__content 
 								h3 Lorem ipsum dolor
@@ -45,9 +45,10 @@ block content
 		section#cta 
 			.container
 				.boxtransparent 
-					p #[b Lorem ipsum dolor sit amet condimentum accumsan] lorem ipsum dolor sit amet porttitor nam non vestibulum. Dui ante non aptent hac molestie viverra conubia libero letius nostra ut. Diam nam non eu aliquam lobortis felis. lorem ipsum dolor sit amet porttitor nam non vestibulum.
-				a.cta(href='speakers.html') 
-					button Speakers Page
+					.inner
+						p #[b Lorem ipsum dolor sit amet condimentum accumsan] lorem ipsum dolor sit amet porttitor nam non vestibulum. Dui ante non aptent hac molestie viverra conubia libero letius nostra ut. Diam nam non eu aliquam lobortis felis. lorem ipsum dolor sit amet porttitor nam non vestibulum.
+						a.cta(href='speakers.html') 
+							button Speakers Page
 
 
 //- block scripts
