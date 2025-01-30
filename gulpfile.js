@@ -1,9 +1,8 @@
 const { src, dest, series, parallel, watch } = require('gulp');
 const pug = require('gulp-pug');
 const sass = require('gulp-sass')(require('sass'));
-// const cssnano = require('cssnano');
-// const autoprefixer = require('gulp-autoprefixer');
-// const minify = require('gulp-minify-css');
+const autoprefixer = require('gulp-autoprefixer');
+const minify = require('gulp-minify-css');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 const imagemin = require('gulp-imagemin');
@@ -51,21 +50,19 @@ function compilePug() {
 
 // Compile Sass files into CSS
 function compileSass() {
-  return (
-    src(paths.sass)
-      .pipe(
-        sass({
-          loadPaths: ['./src/sass'],
-          outputStyle: 'compressed',
-          indentWidth: 0,
-        }).on('error', sass.logError) // Compile Sass
-      )
-      // .pipe(autoprefixer('last 2 version'))
-      // .pipe(minify())
-      .pipe(rename({ suffix: '.min' })) // Add .min suffix for production builds
-      .pipe(dest(`${paths.dist}/css`, { overwrite: true })) // Overwrite existing files
-      .pipe(browserSync.stream())
-  );
+  return src(paths.sass)
+    .pipe(
+      sass({
+        loadPaths: ['./src/sass'],
+        outputStyle: 'compressed',
+        indentWidth: 0,
+      }).on('error', sass.logError) // Compile Sass
+    )
+    .pipe(autoprefixer('last 2 version'))
+    .pipe(minify())
+    .pipe(rename({ suffix: '.min' })) // Add .min suffix for production builds
+    .pipe(dest(`${paths.dist}/css`, { overwrite: true })) // Overwrite existing files
+    .pipe(browserSync.stream());
 }
 
 // Transpile and minify JavaScript
@@ -85,11 +82,14 @@ function compileJs() {
 function optimizeImages() {
   return src(paths.images, { encoding: false })
     .pipe(
-      imagemin([
-        imagemin.mozjpeg({ quality: 85, progressive: true }), // Lossy optimization for JPEG
-        imagemin.optipng({ optimizationLevel: 5 }), // Optimization for PNG
-        imagemin.svgo(), // Optimization for SVG
-      ])
+      gulpif(
+        isProduction,
+        imagemin([
+          imagemin.mozjpeg({ quality: 85, progressive: true }), // Lossy optimization for JPEG
+          imagemin.optipng({ optimizationLevel: 5 }), // Optimization for PNG
+          imagemin.svgo(), // Optimization for SVG
+        ])
+      )
     )
     .pipe(dest(`${paths.dist}/images`));
 }
@@ -101,11 +101,10 @@ function copyAssets() {
 
 // Copy public folder content (e.g., static files)
 function copyPublic() {
-  return src(paths.public, { allowEmpty: true })
-    .pipe(dest(paths.dist))
-    .on('end', () => {
-      console.log('Task completed successfully (even if empty)');
-    });
+  return src(paths.public, { allowEmpty: true }).pipe(dest(paths.dist));
+  // .on('end', () => {
+  //   console.log('Task completed successfully (even if empty)');
+  // });
 }
 
 // Watch files for changes
@@ -140,6 +139,7 @@ const build = series(
 
 // Default task
 exports.default = build;
+exports.build = build;
 
 // Dev task with watch
 exports.dev = series(build, devWatch);
