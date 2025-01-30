@@ -96,12 +96,16 @@ function optimizeImages() {
 
 // Copy static assets
 function copyAssets() {
-  return src(paths.assets).pipe(dest(`${paths.dist}/assets`));
+  return src(paths.assets, { encoding: false }).pipe(
+    dest(`${paths.dist}/assets`)
+  );
 }
 
 // Copy public folder content (e.g., static files)
 function copyPublic() {
-  return src(paths.public, { allowEmpty: true }).pipe(dest(paths.dist));
+  return src(paths.public, { encoding: false, allowEmpty: true }).pipe(
+    dest(paths.dist)
+  );
   // .on('end', () => {
   //   console.log('Task completed successfully (even if empty)');
   // });
