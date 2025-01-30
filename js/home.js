@@ -1,0 +1,1 @@
+var observer=new IntersectionObserver(function(e,t){e.forEach(function(e){e.isIntersecting&&(e.target.classList.add("steps__item--inview"),t.unobserve(e.target))})},{threshold:.5});document.querySelectorAll(".steps__item").forEach(function(e){observer.observe(e)});
