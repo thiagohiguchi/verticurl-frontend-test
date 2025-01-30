@@ -1,9 +1,61 @@
-.item-bg {
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+@use 'modules/variables' as *; // Import variables from modules folder
+@use 'modules/mixins' as *; // Import mixins from modules folder
+
+$primary-color: #00d15f;
+
+@font-face {
+  font-family: 'Allround Gothic Semi';
+  // src: url('../../assets/fonts/Fontspring-DEMO-allroundgothic-semi.otf')
+  //   format('opentype');
+  src: url('../../assets/fonts/Fontspring-DEMO-allroundgothic-semi.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.container {
-  background: purple;
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: white;
+  font-family: 'Allround Gothic Semi', sans-serif;
+}
+
+body {
+  background-color: #000;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  &__logo {
+  }
+  &__highlight {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 30px;
+  }
+  &__text {
+  }
+  &__cta {
+  }
+  &__box {
+  }
+}
+
+.steps {
+}
+
+@include tablet {
+}
+
+@include desktop {
+}
+
+@include desktop-lg {
 }

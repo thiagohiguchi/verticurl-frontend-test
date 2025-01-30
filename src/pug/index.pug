@@ -4,43 +4,28 @@ block variables
 	- var description = 'Test project using Pug, SASS, and JS'
 	- var author = 'Thiago Higuchi'
 	- var prefix = FILE_PREFIX
-	//- - var extraCSS = [FILE_PREFIX+'css/home.css']
+	- var extraCSS = [FILE_PREFIX+'css/pages/home.min.css']
 	- var imgPrefixUrl = IMG_PREFIX_URL
 
 block content
-	#myCarousel.carousel.slide(data-bs-ride='carousel')
-		.carousel-indicators
-			button.active(type='button' data-bs-target='#myCarousel' data-bs-slide-to='0' aria-current='true' aria-label='Slide 1')
-			button(type='button' data-bs-target='#myCarousel' data-bs-slide-to='1' aria-label='Slide 2')
-			button(type='button' data-bs-target='#myCarousel' data-bs-slide-to='2' aria-label='Slide 3')
-		.carousel-inner
-			.carousel-item.item-bg.bg-0.active
-				.container
-					.carousel-caption.text-start
-						h1 Example headline.
-						p Some representative placeholder content for the first slide of the carousel.
-						p
-							a.btn.btn-lg.btn-primary(href='#') Sign up today
-			.carousel-item.item-bg.bg-1
-				.container
-					.carousel-caption
-						h1 Another example headline.
-						p Some representative placeholder content for the second slide of the carousel.
-						p
-							a.btn.btn-lg.btn-primary(href='#') Learn more
-			.carousel-item.item-bg.bg-2
-				.container
-					.carousel-caption.text-end
-						h1 One more for good measure.
-						p Some representative placeholder content for the third slide of this carousel.
-						p
-							a.btn.btn-lg.btn-primary(href='#') Browse gallery
-		button.carousel-control-prev(type='button' data-bs-target='#myCarousel' data-bs-slide='prev')
-			span.carousel-control-prev-icon(aria-hidden='true')
-			span.visually-hidden Previous
-		button.carousel-control-next(type='button' data-bs-target='#myCarousel' data-bs-slide='next')
-			span.carousel-control-next-icon(aria-hidden='true')
-			span.visually-hidden Next
+	main
+		section#hero
+			.container
+				.hero
+					.hero__logo
+						img(src=imgPrefixUrl+'images/hero/logo.svg' alt="Logo")
+					.hero__highlight 
+						span 7
+						h1 Lorem ipsum dolor sit amet mauris dictum magna tortor sir arcu
+					.hero__text
+						h5 Lorem ipsum dolor sit amet mauris dictum magna
+					.hero__cta
+						button button
+					.hero__box
+
+		section#steps
+			.container
 
 
-	.container
+//- block scripts
+//- 	script(src=FILE_PREFIX+'js/speakersCarousel.js')
