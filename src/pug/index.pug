@@ -31,6 +31,7 @@ block content
 							p Lorem ipsum dolor sit amet mauris dictum magna tortor si arcu. Lorem ipsum dolor sit amet mauris dictum magna tortor si arcu. Lorem ipsum dolor sit amet mauris dictum magna tortor si arcu.
 
 		section#steps
+			img.illustration.illustration--middle(src=imgPrefixUrl+'images/steps/illustrations--middle.png' alt="Illustration 1" height="1518" width="577" loading="lazy")
 			.container
 				.steps 
 					each val, index in [1, 2, 3, 4, 5, 6, 7]
@@ -43,6 +44,7 @@ block content
 								p Lorem ipsum dolor sit amet proin maecenas. Lorem ipsum dolor sit amet proin maecenas. Lorem ipsum dolor sit amet proin maecenas.
 
 		section#cta 
+			img.illustration.illustration--bottom(src=imgPrefixUrl+'images/steps/illustrations--bottom.png' alt="Illustration 2" height="1432" width="1021" loading="lazy")
 			.container
 				.boxtransparent 
 					.inner
@@ -50,6 +52,5 @@ block content
 						a.cta(href='speakers.html') 
 							button Speakers Page
 
-
-//- block scripts
-//- 	script(src=FILE_PREFIX+'js/speakersCarousel.js')
+block scripts
+	script(src=FILE_PREFIX+'js/home.js')
