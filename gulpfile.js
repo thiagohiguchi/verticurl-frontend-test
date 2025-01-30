@@ -8,14 +8,17 @@ const uglify = require('gulp-uglify');
 const imagemin = require('gulp-imagemin');
 const clean = require('gulp-clean');
 const rename = require('gulp-rename');
-const browserSync = require('browser-sync').create();
+const logger = require('gulp-logger');
 const gulpif = require('gulp-if');
+const browserSync = require('browser-sync').create();
 
 // Environment variables
 const isProduction = process.env.NODE_ENV === 'production';
 const _gParams = {
-  FILE_PREFIX: isProduction ? '/dist/' : '/',
-  IMG_PREFIX_URL: isProduction ? 'https://thiagohiguchi.github.io/' : '/',
+  FILE_PREFIX: isProduction ? '/verticurl-frontend-test/' : '/',
+  IMG_PREFIX_URL: isProduction
+    ? 'https://thiagohiguchi.github.io/verticurl-frontend-test/'
+    : '/',
 };
 
 // Paths
@@ -81,6 +84,15 @@ function compileJs() {
 // Optimize images
 function optimizeImages() {
   return src(paths.images, { encoding: false })
+    .pipe(
+      gulpif(
+        isProduction,
+        logger({
+          before: 'Optimizing images, it might take a while...',
+          showChange: false,
+        })
+      )
+    )
     .pipe(
       gulpif(
         isProduction,
