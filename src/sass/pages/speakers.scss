@@ -21,6 +21,22 @@ h5 {
   font-family: 'Tahoma', sans-serif;
 }
 
+section {
+  padding: 2.5rem 0;
+
+  @include tablet {
+    padding: 3.75rem 0;
+  }
+
+  @include desktop {
+    padding: 5rem 0;
+  }
+
+  @include desktop-lg {
+    padding: 5.625rem 0;
+  }
+}
+
 .heading {
   font-size: 1.5625rem;
   line-height: 1.875rem;
@@ -46,57 +62,162 @@ h5 {
   grid-template-columns: repeat(1, 1fr);
   row-gap: 30px;
   width: 100%;
+  max-width: 100%;
   margin-top: 44px;
-
-  background: salmon;
 
   &__item {
     width: 100%;
-    border-width: 1px;
-    border-color: #000;
-    border-style: solid;
+    max-width: 280px;
+    margin: auto;
+
+    @include tablet {
+      max-width: none;
+    }
   }
 
   &__picture {
     background-color: $primary-color;
-    min-height: 285px;
+    padding: 0 13.5px 13.5px 0;
+    clip-path: polygon(0 0, 75% 0%, 100% 25%, 100% 100%, 25% 100%, 0 75%);
+    aspect-ratio: 1/1;
+    width: 100%;
+    object-fit: cover;
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
   }
+
   &__textbox {
-    margin-top: 32px;
+    margin-top: 1.25rem;
     text-align: center;
+
+    @include tablet {
+      margin-top: 1.5625rem;
+    }
+
+    @include desktop {
+      margin-top: 2rem;
+    }
   }
+
   &__name {
-    font-size: 1.75rem;
-    line-height: 2.25rem;
+    font-size: 1.375rem;
+    line-height: 1.28;
     letter-spacing: 0px;
+
+    @include tablet {
+      font-size: 1.5rem;
+    }
+
+    @include desktop {
+      font-size: 1.75rem;
+    }
   }
+
   &__details {
     color: $text-color;
     font-family: 'Tahoma', sans-serif;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
+    font-size: 1.125rem;
+    line-height: 1.3;
     font-weight: 400;
-    margin-top: 16px;
+    margin-top: 8px;
+
+    @include desktop {
+      font-size: 1.25rem;
+      line-height: 1.4;
+      margin-top: 16px;
+    }
+  }
+
+  @media (min-width: 500px) {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    row-gap: 64px;
+    column-gap: 30px;
+    margin-top: 88px;
   }
 
   @include tablet {
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    row-gap: 64px;
-    column-gap: 30px;
-    // background-color: cyan;
-    margin-top: 88px;
+  }
 
-    &__item {
-      // max-width: 285px;
+  @include desktop-lg {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  }
+}
+
+.popup {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  &--active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__content {
+    background-color: #232323;
+    border-radius: 8px;
+    text-align: left;
+    position: relative;
+    max-width: 300px;
+    color: white;
+    width: 90%;
+    max-width: 810px;
+
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxmaWx0ZXIgaWQ9Im5vaXNlLWZpbHRlciI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjEuMzQiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48ZmVDb2xvck1hdHJpeCB0eXBlPSJzYXR1cmF0ZSIgdmFsdWVzPSIwIi8+PGZlQ29tcG9uZW50VHJhbnNmZXI+PGZlRnVuY1IgdHlwZT0ibGluZWFyIiBzbG9wZT0iMC40NiIvPjxmZUZ1bmNH IHR5cGU9ImxpbmVhciIgc2xvcGU9IjAuNDYiLz48ZmVGdW5jQiB0eXBlPSJsaW5lYXIiIHNsb3BlPSIwLjQ2Ii8+PGZlRnVuY0EgdHlwZT0ibGluZWFyIiBzbG9wZT0iMC4yNyIvPjwvZmVDb21wb25lbnRUcmFuc2Zlcj48ZmVDb21wb25lbnRUcmFuc2Zlcj48ZmVGdW5jUiB0eXBlPSJsaW5lYXIiIHNsb3BlPSIxLjQ3IiBpbnRlcmNlcHQ9Ii0wLjIzIi8+PGZlRnVuY0cgdHlwZT0ibGluZWFyIiBzbG9wZT0iMS40NyIgaW50ZXJjZXB0PSItMC4yMyIvPjxmZUZ1bmNCIHR5cGU9ImxpbmVhciIgc2xvcGU9IjEuNDciIGludGVyY2VwdD0iLTAuMjMiLz48L2ZlQ29tcG9uZW50VHJhbnNmZXI+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlLWZpbHRlcikiLz48L3N2Zz4=');
+    background-size: cover; /* Ensure it covers the element */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repetition */
+
+    h3 {
+      color: white;
+      font-size: 2.25rem;
+      line-height: 0.8;
+      padding: 24px 30px;
+    }
+
+    p {
+      padding: 30px;
     }
   }
 
-  @include desktop {
-    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  &__decoration {
+    display: block;
+    position: absolute;
+    background-color: #8e71f4;
+    height: 4px;
+    width: 100%;
+  }
 
-    &__item {
-      background-color: cyan;
-      // flex-basis: calc(25% - 30px);
+  &__close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 34px;
+    cursor: pointer;
+  }
+
+  &--trigger {
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover,
+    &:focus {
+      transform: scale(1.05);
     }
   }
 }

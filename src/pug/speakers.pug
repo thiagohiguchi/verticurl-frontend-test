@@ -3,20 +3,41 @@ block variables
 	- var title = 'Verticurl Frontend Test | Thiago Higuchi'
 	- var extraCSS = [FILE_PREFIX+'css/pages/speakers.min.css']
 	- var imgPrefixUrl = IMG_PREFIX_URL
-
+	- 
+		var speakers = [ 
+			{ name: "Ana Applgate", position: "Chief Executive Officer", company: "Veeam Software", picture: "ana.jpg", description: "Commodo proident dolor pariatur officia aliquip enim voluptate consequat. Magna labore labore velit consequat minim cupidatat mollit aliqua laborum. Cupidatat in ullamco magna minim adipisicing et. Laborum commodo id officia proident aute esse anim duis eiusmod aliquip ex. Nulla elit minim culpa laborum adipisicing eiusmod sit nostrud velit cupidatat ipsum." },
+			{ name: "Shaun Le Noir", position: "Chief Strategist", company: "Azure", picture: "shaun.jpg", description: "Ut amet voluptate ullamco et ut aliquip in consectetur sit mollit commodo culpa proident id. Culpa Lorem cupidatat ut Lorem veniam elit qui et do et. Mollit labore cillum pariatur esse occaecat irure cupidatat. Esse anim et do nostrud do. Consequat culpa Lorem aute ex voluptate nostrud aute ipsum excepteur exercitation. Nulla consequat cupidatat amet sit amet anim minim cillum amet occaecat. Nisi anim consectetur ut minim do laboris ipsum dolor quis irure deserunt officia dolore nisi." },
+			{ name: "Alina McKey", position: "Marketing Director", company: "Cloud Native", picture: "alina.jpg", description: "Laborum proident est ea incididunt cillum nostrud. Eu eu ullamco ut id. Culpa officia mollit commodo et minim nostrud velit aute proident dolore aliqua cupidatat. Tempor officia ut aliqua incididunt exercitation dolore." },
+			{ name: "Mike Tailor", position: "Social Media Manager", company: "Veeam Software", picture: "mike.jpg", description: "Exercitation sit est mollit amet tempor. Velit officia velit id non consectetur esse aliquip. Labore ad et ipsum veniam magna veniam fugiat velit adipisicing reprehenderit. Labore minim tempor do irure ullamco velit. Eu occaecat ex irure aliqua consectetur fugiat consectetur Lorem officia. Nisi quis voluptate consectetur pariatur amet consequat sint aliqua qui magna magna." },
+			{ name: "Mary Poppins", position: "Technical Writer", company: "Microsoft", picture: "mary.jpg", description: "Duis laborum consequat enim consectetur pariatur cillum. Ipsum ex consectetur et adipisicing magna eu nisi laboris et velit adipisicing. Culpa ad quis velit nulla excepteur enim tempor ipsum excepteur sint. Occaecat magna cillum amet occaecat laborum incididunt excepteur. Ullamco nisi minim aliquip laboris proident." },
+			{ name: "Calvin Klein", position: "Lead Cloud Manager", company: "American Software", picture: "calvin.jpg", description: "Ad sit sit excepteur pariatur sit. Esse aliquip reprehenderit eu eiusmod. Sint laborum culpa mollit ea non in sint. Ad sit est ea qui non tempor excepteur cillum. Ex non sit quis occaecat qui proident." },
+			{ name: "Angela Soares", position: "Product Owner", company: "SaaS Ownership", picture: "angela.jpg", description: "Velit fugiat fugiat ipsum laborum sit. Ex deserunt laboris do nisi sint. Do cillum excepteur officia qui id ipsum aliqua labore magna." },
+			{ name: "Antony Shimmer", position: "Senior Manager", company: "Digital Solutions", picture: "antony.jpg", description: "Cillum consectetur nisi voluptate mollit non minim irure enim deserunt cupidatat. Anim pariatur ad eiusmod proident. Excepteur tempor est qui sunt enim consectetur excepteur." },
+		];
 
 block content
-	main.container
-		h2.heading.text--center Spotlight Speakers
-		.speakers 
-			- var n = 8
-			each _, index in Array.from({ length: n })
-				.speakers__item 
-					.speakers__picture 
-						img(src=imgPrefixUrl+'images/speakers/ana.jpg' alt="Ana Applegate")
-					.speakers__textbox 
-						.speakers__name 
-							h5 Ana Applegate
-						.speakers__details
-							p Chief Executive Officer
-							p Veeam Software
+	main
+		section
+			.container
+				h2.heading.text--center Spotlight Speakers
+				.speakers 
+					each person, index in speakers
+						.speakers__item 
+							.speakers__picture.popup--trigger(data-popup="popup"+(index + 1)) 
+								img(src=imgPrefixUrl+'images/speakers/'+person.picture alt=person.name)
+							.speakers__textbox 
+								.speakers__name 
+									h5= person.name
+								.speakers__details
+									p= person.position
+									p= person.company
+							.popup(id="popup"+(index + 1))
+								.popup__overlay
+								.popup__content
+									span.popup__close &times;
+									h3= person.name
+									.popup__decoration
+									p= person.description
+
+block scripts
+	script(src=FILE_PREFIX+'js/speakersCarousel.js')
