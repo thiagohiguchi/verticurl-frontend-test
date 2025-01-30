@@ -1,16 +1,35 @@
 @use 'modules/variables' as *; // Import variables from modules folder
 @use 'modules/mixins' as *; // Import mixins from modules folder
+@use 'sass:color';
 
 $primary-color: #00d15f;
 
 @font-face {
-  font-family: 'Allround Gothic Semi';
-  // src: url('../../assets/fonts/Fontspring-DEMO-allroundgothic-semi.otf')
-  //   format('opentype');
-  src: url('../../assets/fonts/Fontspring-DEMO-allroundgothic-semi.ttf')
-    format('truetype');
+  font-family: 'Harabara';
+  src: url('../../assets/fonts/Harabara-Bold.ttf.woff') format('woff'),
+    url('../../assets/fonts/Harabara-Bold.ttf.svg#Harabara-Bold') format('svg'),
+    url('../../assets/fonts/Harabara-Bold.ttf.eot'),
+    url('../../assets/fonts/Harabara-Bold.ttf.eot?#iefix')
+      format('embedded-opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Harabara';
+  src: url('../../assets/fonts/harabara-mais-light.woff') format('woff'),
+    url('../../assets/fonts/harabara-mais-light.woff2') format('woff2'),
+    url('../../assets/fonts/harabara-mais-light.eot'),
+    url('../../assets/fonts/harabara-mais-light.eot?#iefix')
+      format('embedded-opentype'),
+    url('../../assets/fonts/harabara-mais-light.otf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
+}
+
+* {
+  font-family: 'Harabara', sans-serif;
 }
 
 h1,
@@ -19,36 +38,266 @@ h3,
 h4,
 h5 {
   color: white;
-  font-family: 'Allround Gothic Semi', sans-serif;
+  font-weight: bold;
+  letter-spacing: 2px;
+  line-height: 1.33;
+}
+
+p {
+  color: white;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.1;
+  letter-spacing: -0.24px;
+
+  b {
+    color: $primary-color;
+  }
+
+  @include tablet {
+    font-size: 1.5rem;
+  }
 }
 
 body {
   background-color: #000;
 }
 
+.cta {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: solid 2px $primary-color;
+  background-color: $primary-color;
+  width: fit-content;
+
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: bold;
+  line-height: 1.33;
+  letter-spacing: 2px;
+  text-align: center;
+  color: #232323;
+  text-transform: uppercase;
+
+  &:hover,
+  &:focus {
+    background-color: color.adjust($primary-color, $lightness: 15%);
+  }
+}
+
+#hero {
+  position: relative;
+  overflow: hidden;
+
+  .decoration {
+    position: absolute;
+
+    z-index: -1;
+    &--circle {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    &--picture {
+      display: none;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  @include desktop {
+    .decoration {
+      &--picture {
+        display: block;
+      }
+    }
+  }
+}
+
 .hero {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 20px;
+  padding-top: 5%;
+
+  // background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTY2MSIgaGVpZ2h0PSIxMjUwIiB2aWV3Qm94PSIwIDAgMTY2MSAxMjUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxnIG9wYWNpdHk9IjAuOCIgaWQ9ImZpbHRlcjBfZl8yNDcxOF8xMjI3Ij4KICAgIDxlbGxpcHNlIGN4PSIxMTI4Ljg5IiBjeT0iNDg4Ljk1MyIgcng9IjQ5Ni42OSIgcnk9Ijk2My45OTMiIHRyYW5zZm9ybT0icm90YXRlKC03MS42MjcgMTEyOC44OSA0ODguOTUzKSIgZmlsbD0idXJsKCNwYWludDBfbGluZWFyXzI0NzE4XzEyMjcpIi8+CiAgPC9nPgogIDxkZWZzPgogICAgPGZpbHRlciBpZD0iZmlsdGVyMF9mXzI0NzE4XzEyMjciIHg9IjAuNTg4NjU0IiB5PSItMjcxLjkyIiB3aWR0aD0iMjI1Ni42IiBoZWlnaHQ9IjE1MjEuNzciIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KICAgICAgPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KICAgICAgPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpPSJTb3VyY2VHcmFwaGljIiBpMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9InNoYXBlIi8+CiAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjEwMCIgcmVzdWx0PSJlZmZlY3QxX2ZvcmVncm91bmRCbHVyXzI0NzE4XzEyMjciLz4KICAgIDwvZmlsdGVyPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDBfbGluZWFyXzI0NzE4XzEyMjciIHgxPSIyMzc5LjM1IiB5MT0iMTMwNC4xMyIgeDI9IjE2MjQuODciIHkyPSIxNjk5LjE0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiMzNzAwRkYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KPC9zdmc+');
 
   &__logo {
+    margin-bottom: calc(80px - 20px);
+
+    img {
+      max-width: 120px;
+    }
   }
   &__highlight {
     display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-    gap: 30px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 825px;
+
+    span {
+      font-size: 5.625rem;
+      line-height: 0.8;
+      font-weight: bold;
+      color: $primary-color;
+    }
+    h1 {
+      font-size: 2.75rem;
+      line-height: 0.94;
+      letter-spacing: none;
+      color: $primary-color;
+    }
   }
   &__text {
+    h5 {
+      font-size: 1.75rem;
+      list-style: 1.16;
+    }
   }
   &__cta {
   }
   &__box {
+    border-radius: 20px;
+    backdrop-filter: blur(30px);
+    // box-shadow: -8px 12px 36px 0 rgba(0, 0, 0, 0.06),
+    //   -8px 10px 4px 0 rgba(0, 0, 0, 0.01), -5px 5px 32px 0 #505861;
+    border-style: solid;
+    border-width: 2px;
+    border-image-source: linear-gradient(
+      180deg,
+      #fff -5%,
+      rgba(255, 255, 255, 0) 83%
+    );
+    border-image-slice: 1;
+
+    // background-image: linear-gradient(247deg, #505861 184%, #232323 3%),
+    //   linear-gradient(119deg, #fff -5%, rgba(255, 255, 255, 0) 43%);
+    background-image: linear-gradient(247deg, #505861 184%, #232323 3%),
+      linear-gradient(180deg, #fff -5%, rgba(255, 255, 255, 0) 43%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+
+    .inner {
+      padding: 3% 5%;
+
+      @include tablet {
+        padding: 24px 48px;
+      }
+    }
+  }
+
+  @include tablet {
+    gap: 32px;
+    padding-top: 80px;
+
+    &__logo {
+      margin-bottom: calc(80px - 32px);
+
+      img {
+        max-width: none;
+      }
+    }
+    &__highlight {
+      flex-direction: row;
+      align-items: center;
+      gap: 30px;
+
+      span {
+        font-size: 14.5625rem;
+      }
+      h1 {
+        font-size: 4rem;
+      }
+    }
+    &__text {
+      h5 {
+        max-width: 817px;
+        font-size: 2.75rem;
+      }
+    }
+  }
+
+  @include desktop {
+  }
+
+  @include desktop-lg {
   }
 }
 
+#steps {
+  padding: 68px 0 108px 0;
+}
+
 .steps {
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 33px;
+  }
+  &__number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 83px;
+    height: 83px;
+    padding: 10%;
+    // aspect-ratio: 1/1;
+
+    border-radius: 10px;
+    // box-shadow: -8px 12px 36px 0 rgba(0, 0, 0, 0.06),
+    // -8px 10px 4px 0 rgba(0, 0, 0, 0.01), -9px 10.5px 32px 0 #505861;
+    border-style: solid;
+    border-width: 4px;
+    border-color: $primary-color;
+    // border-image-source: linear-gradient(
+    //   158deg,
+    //   #00d15f 56%,
+    //   rgba(255, 255, 255, 0) 91%
+    // );
+    // border-image-slice: 1;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+
+    span {
+      color: $primary-color;
+      font-size: 100px;
+      font-weight: bold;
+    }
+  }
+  &__content {
+    h3 {
+      font-size: 2.75rem;
+      line-height: 1.18;
+    }
+    p {
+      font-size: 24px;
+      line-height: 1.33;
+      letter-spacing: -0.24px;
+    }
+  }
+
+  @include desktop {
+    &__item {
+      flex-direction: row;
+    }
+    &__number {
+      width: 283px;
+      height: 283px;
+      padding: 48px;
+    }
+  }
+}
+
+#cta {
 }
 
 @include tablet {
