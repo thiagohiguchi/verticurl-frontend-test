@@ -2,21 +2,41 @@
 
 ## Overview
 
-This project is a frontend test for a role at Verticurl. The objective is to replicate a provided design using **HTML**, **SASS**, and **VanillaJS**, while ensuring the page is responsive, interactive, and optimized for different screen sizes.
+This project is a frontend test for a role at Verticurl. The objective is to replicate a provided design using **HTML**, **SASS**, **BEM**, and **VanillaJS**, while ensuring the page is responsive, interactive, and optimized for different screen sizes.
+
+**Gulp** is used in this project to automate tasks like minification and live reloading, making the development process more efficient.
+
+There are two fully functional pages, home and speakers. To simplify access, the pages have been deployed remotely.
+
+- **Home**: https://thiagohiguchi.github.io/verticurl-frontend-test/
+- **Speakers**: https://thiagohiguchi.github.io/verticurl-frontend-test/speakers.html
+
+Otherwise, after running the process locally, the pages are accessible throuaout the links:
+
+- **Home**: http://localhost:9000
+- **Speakers**: http://localhost:9000/speakers.html
 
 ### Technologies:
-- **Markup**: Pug
+
+- **HTML Markup**: Pug
 - **Styles**: SASS (CSS preprocessor)
 - **JavaScript**: Vanilla JavaScript
 - **CSS Methodology**: BEM (Block-Element-Modifier)
-- **Tools**: Webpack, webpack-dev-server
+- **Tools**: Gulp 5
 
 ## Features
 
 - Responsive design, adaptable to desktop, tablet, and mobile screens
-- Interactive animations for decorative elements
+- Interactive animations
 - Modal popup for speaker descriptions with dynamic content
 - BEM methodology for consistent and maintainable CSS
+
+## Project Design & Adjustments
+
+- To enhance the development experience and streamline setup, a custom Gulp configuration is provided to assist with task management.
+- As no mobile mockups were provided, a simplified version was designed to ensure proper page presentation.
+- The font used is proprietary, so Harabara and Tahoma were used as alternative font families.
+- The pages are relatively simple, so a more complex architecture was not implemented.
 
 ## Requirements
 
@@ -44,17 +64,26 @@ Install the required npm dependencies:
 npm install
 ```
 
+:warning: Install GULP globally:
+
+```
+npm install --global gulp-cli
+```
+
 ### 3. Run the Development Server
 
 To start the development server and preview the site locally, run:
 
 ```
-npm start
+npm run dev
 ```
 
 This command will:
-- Start the webpack-dev-server in **development mode**
+
+- Start the local server in **development mode**
 - Open the site in your default web browser
+  - **Home**: http://localhost:9000
+  - **Speakers**: http://localhost:9000/speakers.html
 
 ### 4. Build the Project
 
@@ -75,6 +104,7 @@ npm run deploy
 ```
 
 This will:
+
 - Build the project
 - Deploy the contents of the `dist/` folder to the `gh-test` branch of your GitHub repository
 
@@ -93,23 +123,24 @@ The project is organized as follows:
 │   ├── images/              # Image files (JPG, PNG, GIF, etc.)
 │   ├── js/                  # JavaScript entry point and other custom scripts
 │   ├── pug/                 # Pug templates and layouts
+│   ├── public/              # Public files
 │   └── sass/                # Sass files (includes styles for layout, components)
-└── webpack.config.js        # Webpack configuration for bundling assets
+└── gulpfile.js              # Gulp configuration for processing and bundling assets
 ```
 
-### Folder Breakdown
+## Next Steps
 
-- **`assets/`**: Contains static files like fonts, SVGs, etc.
-- **`images/`**: Stores image files (JPG, PNG, GIF, etc.).
-- **`css/`**: Global styles or third-party CSS files.
-- **`js/`**: Custom JavaScript files, including the main entry point (`index.js`).
-- **`sass/`**: Styles using the **SASS** preprocessor, following the **BEM** (Block-Element-Modifier) methodology for CSS organization.
-- **`pug/`**: Pug templates and layout files.
-
-### Webpack Configuration
-
-The project uses **Webpack 5.x** for compiling **SASS** and **Pug** into production-ready files. The configuration is located in `webpack.config.js`. Webpack is set up to use:
-
-- **`sass-loader`** to process SASS into CSS
-- **`pug-html-loader`** to compile Pug templates into HTML
-- **`webpack-dev-server`** for live reloading during development
+- [ ] Purge unused CSS during the production build.
+- [ ] Implement linting to ensure better code consistency.
+- [ ] Improve SEO support.
+- [ ] Inline critical CSS for improved web performance.
+- [ ] Improve the Gulp configuration to prevent minifying images during every build.
+- [ ] Adopt a more efficient approach to handling images (webp, srcset, and fallback for less commonly used clients).
+- [ ] Review and optimize Sass mixins and variables for enhanced reusability and maintainability.
+- [ ] Implement lazy loading for images and other assets where applicable.
+- [ ] Ensure all HTML elements have appropriate ARIA attributes for improved accessibility.
+- [ ] Optimize meta tags and content to boost SEO performance.
+- [ ] Set up a continuous integration/continuous deployment (CI/CD) pipeline for automated testing and deployment.
+- [ ] Implement unit tests for JavaScript components to ensure code reliability.
+- [ ] Consider using a testing framework like Jest or Mocha.
+- [ ] Setup a CDN for faster assets delivery.
