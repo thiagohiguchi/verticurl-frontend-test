@@ -26,7 +26,7 @@ block content
 					each person, index in speakers
 						.speakers__item 
 							.speakers__picture.popup--trigger(data-popup="popup"+(index + 1)) 
-								img(src=imgPrefixUrl+'images/speakers/'+person.picture alt=person.name)
+								img(src=imgPrefixUrl+'images/speakers/'+person.picture alt=person.name loading="lazy")
 							.speakers__textbox 
 								.speakers__name 
 									h5= person.name
