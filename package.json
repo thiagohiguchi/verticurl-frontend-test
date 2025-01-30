@@ -12,7 +12,7 @@
   "keywords": [
     "pug",
     "sass",
-    "webpack"
+    "gulp"
   ],
   "author": "Thiago Higuchi <thiago.higuchi@gmail.com>",
   "license": "MIT",
@@ -33,6 +33,7 @@
     "gulp-clean": "^0.4.0",
     "gulp-if": "^3.0.0",
     "gulp-imagemin": "^7.1.0",
+    "gulp-logger": "^0.0.2",
     "gulp-minify-css": "^1.2.4",
     "gulp-postcss": "^10.0.0",
     "gulp-pug": "^5.0.0",

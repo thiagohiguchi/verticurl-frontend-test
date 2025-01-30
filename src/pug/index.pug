@@ -3,7 +3,6 @@ block variables
 	- var title = 'Verticurl Frontend Test | Thiago Higuchi'
 	- var description = 'Test project using Pug, SASS, and JS'
 	- var author = 'Thiago Higuchi'
-	- var prefix = FILE_PREFIX
 	- var extraCSS = [FILE_PREFIX+'css/pages/home.min.css']
 	- var imgPrefixUrl = IMG_PREFIX_URL
 
@@ -22,7 +21,7 @@ block content
 					.hero__text
 						h5 Lorem ipsum dolor sit amet mauris dictum magna tortor si arcu.
 					.hero__cta
-						a.cta(href='speakers.html') 
+						a.cta(href='speakers.html' aria-label="Speakers Page") 
 							button Speakers Page
 					.hero__box
 						.inner
@@ -49,8 +48,7 @@ block content
 				.boxtransparent 
 					.inner
 						p #[b Lorem ipsum dolor sit amet condimentum accumsan] lorem ipsum dolor sit amet porttitor nam non vestibulum. Dui ante non aptent hac molestie viverra conubia libero letius nostra ut. Diam nam non eu aliquam lobortis felis. lorem ipsum dolor sit amet porttitor nam non vestibulum.
-						a.cta(href='speakers.html') 
+						a.cta(href='speakers.html' aria-label="Speakers Page") 
 							button Speakers Page
 
-block scripts
-	script(src=FILE_PREFIX+'js/home.js')
+	script(src=FILE_PREFIX+'js/home.js' defer)
