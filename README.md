@@ -123,7 +123,6 @@ The project is organized as follows:
 │   ├── images/              # Image files (JPG, PNG, GIF, etc.)
 │   ├── js/                  # JavaScript entry point and other custom scripts
 │   ├── pug/                 # Pug templates and layouts
-│   ├── public/              # Public files
 │   └── sass/                # Sass files (includes styles for layout, components)
 └── gulpfile.js              # Gulp configuration for processing and bundling assets
 ```

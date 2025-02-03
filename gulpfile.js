@@ -30,7 +30,6 @@ const paths = {
   js: 'src/js/**/*.js',
   images: 'src/images/**/*.{jpg,jpeg,png,gif,svg}',
   assets: 'src/assets/**/*',
-  public: 'public',
 };
 
 // Clean the output directory
@@ -113,16 +112,6 @@ function copyAssets() {
   );
 }
 
-// Copy public folder content (e.g., static files)
-function copyPublic() {
-  return src(paths.public, { encoding: false, allowEmpty: true }).pipe(
-    dest(paths.dist)
-  );
-  // .on('end', () => {
-  //   console.log('Task completed successfully (even if empty)');
-  // });
-}
-
 // Watch files for changes
 function devWatch() {
   browserSync.init({
@@ -137,20 +126,12 @@ function devWatch() {
   watch(paths.js, compileJs);
   watch(paths.images, optimizeImages);
   watch(paths.assets, copyAssets);
-  watch(paths.public, copyPublic).on('change', browserSync.reload);
 }
 
 // Build task
 const build = series(
   cleanDist,
-  parallel(
-    compilePug,
-    compileSass,
-    compileJs,
-    optimizeImages,
-    copyAssets,
-    copyPublic
-  )
+  parallel(compilePug, compileSass, compileJs, optimizeImages, copyAssets)
 );
 
 // Default task
