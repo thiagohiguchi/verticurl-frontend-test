@@ -1,0 +1,9 @@
+.steps 
+  each val, index in [1, 2, 3, 4, 5, 6, 7]
+    .steps__item(class='steps__item--' + (index + 1))
+      .steps__decoration(class='steps__decoration--' + (index + 1))
+        .steps__number
+          span= index + 1
+      .steps__content 
+        h3 Lorem ipsum dolor
+        p Lorem ipsum dolor sit amet proin maecenas. Lorem ipsum dolor sit amet proin maecenas. Lorem ipsum dolor sit amet proin maecenas.

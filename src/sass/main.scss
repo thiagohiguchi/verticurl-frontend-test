@@ -12,3 +12,15 @@
     text-align: center;
   }
 }
+
+.border {
+  &--round {
+    border-radius: 20px;
+  }
+}
+
+.overflow {
+  &--hidden {
+    overflow: hidden;
+  }
+}
